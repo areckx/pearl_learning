@@ -1,0 +1,40 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+# By convention all global variables are CAPS
+open FILE, "executables";
+
+# use `our' for global variables, `my' for local
+our $FIRST = <FILE>;
+
+
+sub listFile
+{
+	# By convention local variables are lowercase(I like to camelCase)
+	# It appears that for local `open' operations, a $
+	
+	open my $localFile, "executables";
+
+	my $second = <$localFile>;
+
+	print "Local var in scalar context :: $second\n"; 
+
+	my @third = <$localFile>;
+	print "Local var in list context :: $second\n";
+
+	# Angle operator returns `undef' at end of file(EOF)
+	# Considered `False' in a `truth value'
+	while (my $second = <$localFile>)
+	{
+		print $second;
+	}
+} 
+
+listFile;
+
+

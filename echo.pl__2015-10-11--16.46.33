@@ -1,0 +1,34 @@
+#!/usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+# Perl program that acts similar as UNIX `cat'
+
+# I will use underscore(_) for subroutines or vars that pertain to 
+# file/system operations
+sub print_file
+{
+	our $file = shift;
+	open FILE, $file;
+
+	while (my $line = <FILE>)
+	{
+		print $line;
+	}
+}
+
+sub cat
+{
+	# use `shift' operator to iterate through the list
+	# When the list is is empty, `shift' returns `undef' and ends the loops
+	while (our $file = shift)
+		{
+			print_file $file;
+		}
+}
+
+cat @ARGV;

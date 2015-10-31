@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+use strict;
+use warnings; 
+
+open my $file, "annoying.txt"; 
+
+my $row = <$file>;
+chomp $row;
+
+
+
+

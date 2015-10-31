@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+use strict; use warnings;
+
+# Hash
+my %scientists = 
+	(
+		"Newton" => "Isaac",
+		"Einstein" => "Albert",
+		"Darwin" => "Charles",
+	);
+	
+print $scientists{"Newton"} . "\n";
+print $scientists{"Einstein"} . "\n";
+print $scientists{"Darwin"} . "\n";
+
+my @scientists = %scientists;
+
+print "@scientists\n";

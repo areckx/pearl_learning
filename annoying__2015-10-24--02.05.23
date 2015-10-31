@@ -1,0 +1,207 @@
+#!/usr/bin/perl
+use strict; use warnings; 
+# TODO
+# 
+# 	[*] Each file has one more line than previous (add)
+#
+# 	[*] "Compound" effect where each new file prints contents
+# 		of previous file and appends, so each file is exponentially
+# 		larger (compound)
+#
+# 	[] Allow user to input desired number of files to create
+#
+# 	[*] Set flag options so use can invoke command to do either add1
+# 		or compound [ -a, --add ] and [ -c, --compound ]
+# 	
+# 	[] Set args which allow naming of files with numbers (file_n if < 10,
+# 		file_nn if < 100, file _nnn if < 1000
+# 		
+# 		<> Allow for expansion no matter how many files are to be made
+# 			() Throw error and quit if resulting files larger than available
+# 				memory/space
+
+
+
+
+
+# Use regex to convert @ARGV to contain only what the desired elements
+# of each arg should be
+
+# Should contain only elements which contain at least one (-) character
+# and store all of them (at the moment only one or the other but if both
+# throw an error and exit
+my @flags = @ARGV;
+
+# Should contain only elements enclosed in either (") or (')
+
+
+
+my @string = @ARGV;
+print @string, "\n";
+
+
+# The problem lies in the fact that when passing args via the command line
+# the string is added to @ARGV without the quotation marks
+#
+# Possible solutions:
+# 	[] find a way to keep the "" (or any symbol, really) in order to 
+# 		seperate the string args from the flags
+
+my $string;
+#if (@string =~  /"(.*?)"/) 
+#{ 
+#	@string = "$1";
+#	print @string, "\n";
+#}
+
+
+
+
+
+
+
+
+
+# Display help
+# 	[] Show usable flags
+# 	[] Show program information including where latest source can be found
+
+sub help
+{
+	print "Usage:\n";
+}
+
+
+# Create 4 files
+# 	[] First file starts with one line
+# 	[] Second with contents of first file + add line (1 + 1 = 2)
+# 	[] Third file with contents of second file + add line (2 + 1 = 3)
+# 	[] Fourth file with contents of third file + add line (3 + 1 = 4) 
+sub add
+{
+	for (my $i = 1; $i < 5; $i++)
+	{ 
+		my $new = undef; 
+		my $filename = "$i.txt"; 
+		my $encoding = ":encoding(UTF-8)"; 
+
+		open ($new, ">> $encoding", $filename) 
+			|| die "cannot open >> $encoding $i.txt: $!"; 
+
+		print $new "$string\n"; 
+
+			if ($i > 1 && $i < 5)
+			{
+				my $prev = $i - 1;
+				open (my $old, "< $encoding", "$prev.txt")
+					|| die "cannot open < $encoding $prev.txt: $!"; 
+
+				while (my $line = <$old>)
+				{
+					print $new "$line"; 
+					shift; 
+				}
+
+				close $old;
+			} 
+
+		close $new; 
+	} 
+}
+
+
+# Create initial file with one line(1)
+# second line has 2x first file (2 * 1 = 2)
+# third file  has 2x second file (2 * 2 = 4)
+# fourth file has 2x third file (4 * 2 = 8)
+sub compound
+{ 
+	for (my $i = 1; $i < 5; $i++)
+	{ 
+		my $new = undef; 
+		my $filename = "$i.txt"; 
+		my $encoding = ":encoding(UTF-8)"; 
+
+		open ($new, ">> $encoding", $filename) 
+			|| die "cannot open >> $encoding $i.txt: $!"; 
+
+
+		if ($i == 1)
+		{ 
+			print $new "$string\n"; 
+		}
+
+			if ($i > 1 && $i < 5)
+			{
+				my $prev = $i - 1;
+				open (my $old, "< $encoding", "$prev.txt")
+					|| die "cannot open < $encoding $prev.txt: $!"; 
+
+				while (my $line = <$old>)
+				{ 
+					print $new "$line"; 
+					shift; 
+					print $new "$line"; 
+				}
+
+				
+				close $old;
+			} 
+
+		close $new; 
+	} 
+}
+
+if (grep (/-a/, @flags) || grep (/--add/, @flags))
+{
+	add;
+}
+
+
+if (grep (/-c/, @flags) || grep (/--compound/, @flags))
+{
+	compound;
+}
+
+
+if (grep (/-h/, @flags) || grep (/--help/, @flags))
+{
+	help;
+}
+
+if (!@ARGV)
+{
+	help;
+	exit;
+}
+
+
+if (grep (/-a/, @flags) && grep (/-c/, @flags) )
+{
+	help;
+	exit;
+}
+
+
+if (grep (/--add/, @flags) && grep (/--compound/, @flags) )
+{
+	
+	print "Use either -a, --add or -c, --compound, flags conflict \n"; 
+	exit;
+}
+
+
+if (grep (/--add/, @flags) && grep (/-a/, @flags) )
+{
+
+	print "Use either -a or --add\n"; 
+	exit;
+}
+
+
+if (grep (/--compound/, @flags) && grep (/-c/, @flags) )
+{
+	print "Use either -c or --compound\n"; 
+	exit;
+}
+

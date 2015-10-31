@@ -1,0 +1,44 @@
+#!/usr/bin/perl
+use strict; use warnings; 
+# TODO
+# 
+# 	[] "Compound" effect where each new file prints contents
+# 		of previous file and appends, so each file is exponentially
+# 		larger
+
+for (my $i = 1; $i < 5; $i++)
+{ 
+	my $new = undef; 
+	my $filename = "$i.txt"; 
+	my $encoding = ":encoding(UTF-8)";
+
+
+
+	open ($new, ">> $encoding", $filename) 
+		|| die "cannot open >> $encoding $i.txt: $!"; 
+
+	print $new "omgomgomgomgomgomg\n"; 
+
+		if ($i > 1 && $i < 5)
+		{
+			my $prev = $i - 1;
+			open (my $old, "< $encoding", "$prev.txt")
+				|| die "cannot open < $encoding $prev.txt: $!"; 
+
+			while (my $line = <$old>)
+			{
+				print $new "$line"; 
+				shift; 
+			}
+
+			close $old;
+		} 
+
+	close $new; 
+}
+
+
+
+
+
+

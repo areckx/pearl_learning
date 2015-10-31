@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+my @animals = ("Dog", "Cat", "Fish", "Lemur");
+
+my $context = @animals; 
+
+print "Number of elements in array :: $context\n";
+
+print "Entire array :: @animals\n";
+
+print "Last element of array :: $animals[$#animals]\n";

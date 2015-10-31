@@ -1,0 +1,59 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+#suboutine echo prints arguments given by command line invocation
+sub echo
+{
+	my @params = "@_\n";
+	my @word = @params;
+
+	print "echo :: @word";
+}
+
+# subroutine echoParams prints number of paramters
+sub echoParams
+{
+	my @params = "@_\n";
+	my $word = @params;
+
+	print "echoParams :: $word\n";
+}
+
+# subroutine echoList seems to act in the same way as echo
+sub echoList
+{
+	my $params = "@_\n"; 
+	my @word = $params;
+
+	print "echoList :: @word";
+} 
+
+sub list
+{
+	my @list = (1, 2, 3);
+
+	print "There should have been a list :: @list\n";
+}
+
+sub listScalar
+{
+	my @list = (1, 2, 3); 
+	my $scalar = @list;
+
+	print "List as scalar :: $scalar\n";
+}
+
+echo @ARGV;
+
+echoParams @ARGV;
+
+echoList @ARGV;
+
+list;
+
+listScalar;

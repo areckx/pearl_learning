@@ -1,0 +1,16 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+sub listAssignment
+{
+	my ($p1, $p2, @params) = @_;
+
+	print "List of paramaters \$p1, \$p2, and \@params :: $p1 $p2 @params\n";
+}
+
+listAssignment @ARGV;

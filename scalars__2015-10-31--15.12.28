@@ -1,0 +1,7 @@
+#!/usr/bin/perl
+use strict; use warnings;
+
+##my @array = ("one", "two", "three", "four", "Knight to D4");
+##
+##print "This array has " . (scalar @array) . " elements.\n";
+##print "Last populated index is $#array.\n";

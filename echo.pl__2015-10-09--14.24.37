@@ -1,0 +1,83 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+#suboutine echo prints arguments given by command line invocation
+sub echo
+{
+	my @params = "@_\n";
+	my @word = @params;
+
+	print "echo :: @word";
+}
+
+# subroutine echoParams prints number of paramters
+sub echoParams
+{
+	my @params = "@_\n";
+	my $word = @params;
+
+	print "echoParams :: $word\n";
+}
+
+# subroutine echoList seems to act in the same way as echo
+sub echoList
+{
+	my $params = "@_\n"; 
+	my @word = $params;
+
+	print "echoList :: @word";
+} 
+
+sub list
+{
+	my @list = (1, 2, 3);
+
+	print "There should have been a list :: @list\n";
+}
+
+sub listScalar
+{
+	my $scalar = (1, 2, 3);
+
+	print "\@list as a scalar :: $scalar\n";
+}
+
+# Assign a list to an array variable, resulting in array value. 
+# Prints length of list @list, which is 3
+sub listLength
+{
+	my @list = (1, 2, 3); 
+	my $scalar = @list;
+
+	print "Length of \@list :: $scalar\n";
+}
+
+sub listAssignment
+{
+	my (@p1, @p2, @params) = @_;
+
+	print "List of paramaters \$p1, \$p2, and \@params :: @p1 @p2 @params\n";
+}
+
+echo @ARGV;
+
+echoParams @ARGV;
+
+echoList @ARGV;
+
+list;
+
+listScalar;
+
+listLength;
+print "There is a subtle difference between assigning a list to an "
+	. "array value and assigning a list to a scalar value.\nThe latter "
+	. "will output the last value of the list, the former outputting the "
+	. "length of the list.\n\n\n";
+
+listAssignment;

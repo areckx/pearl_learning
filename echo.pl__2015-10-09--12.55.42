@@ -1,0 +1,27 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+#suboutine echo prints arguments given by command line invocation
+sub echo
+{
+	my @params = "@_\n";
+	my @word = @params;
+	print "echo :: @word";
+}
+
+# subroutine echoParams prints number of paramters
+sub echoParams
+{
+	my @params = "@_\n";
+	my $word = @params;
+	print "echoParams :: $word\n";
+}
+
+echo @ARGV;
+
+echoParams @ARGV;

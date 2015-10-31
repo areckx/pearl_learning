@@ -1,0 +1,22 @@
+#!/usr/bin/perl
+use strict; use warnings;
+
+# TODO
+# SDL::
+#
+# 	[] Place sound files (wav, mp3, ogg) or playlist files (pls, m3u) into
+# 	   folder `sound/` for ease of organizing profiles
+#
+# 	[] sub profile
+# 		() load all files from <dir> and store locations in @soundfile
+#
+# 	[] sub play
+# 		() plays designated @soundfile[$i]
+#
+#   
+#
+# Tk::
+#
+# 	[] Interface with cli for creating buttons for audio files, graphical
+# 	   representations of options such as fade in/out, loop, playing at 
+# 	   specific volume, etc.

@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+##
+### Hashes
+###
+###  A set of key/value pairs
+##my %fruitColor = ("apple", "red", "banana", "yellow");
+##
+### Or...
+##my %cleanFruitColor = 
+##(
+##    apple  => "red",
+##    banana  => "yellow",
+##);
+##
+### Gives "red"
+##print "$fruitColor{'apple'}\n";
+##
+### Gives "yellow"
+##print "$cleanFruitColor{'banana'}\n";
+##
+##
+##
+### Get at lists of keys
+##my @fruits = keys %cleanFruitColor;
+##my @colors = values %cleanFruitColor;
+##
+##print "@fruits\n";
+##print "@colors\n";
+##
+### Hashes have no particular internal order, although you can `sort' and `loop'
+##
+##

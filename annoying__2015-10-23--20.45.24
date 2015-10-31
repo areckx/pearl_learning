@@ -1,0 +1,7 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+print "It's over 9000!!!\n"
+sleep 10;
+print "@ARGV" x 9001 . "\n";

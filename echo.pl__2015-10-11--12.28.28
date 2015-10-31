@@ -1,0 +1,15 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+# By convention all global variables are CAPS
+open FILE, "executables";
+
+sub listFile
+{
+	open my $localFile, "executables";
+}

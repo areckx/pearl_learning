@@ -1,0 +1,19 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+sub listAssignment
+{
+	my ($p1, $p2, @params) = @_;
+
+	print "List of paramaters \$p1, \$p2, and \@params :: $p1 $p2 @params\n";
+}
+
+# Remember to use @ARGV if the subroutine requires command line args! 
+# Don't spend hours trying to figure out error messages. Check to see if you
+# wrote everything required.
+listAssignment @ARGV;

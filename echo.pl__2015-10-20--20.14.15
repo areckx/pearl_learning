@@ -1,0 +1,57 @@
+#!/usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+my @animals = ("Dog", "Cat", "Fish", "Lemur");
+
+# Assign array to scalar context var to report number of elements correctly
+my $context = @animals; 
+
+# Redundant method of reporting number of elements in array 
+my $elements = $#animals + 1;
+
+print "Zero-indexed number of elements in array :: $#animals\n";
+
+print "Number of elements in array :: $context\n";
+print "Using redundant method to find elements in array :: $elements \n";
+
+# Or...
+if (@animals == 4)
+{
+    print "You can use the \@<array> without doing something silly like "
+    ."using \$#<array> + 1. \n";
+}
+
+print "Entire array :: @animals\n";
+
+print "Last element of array :: $animals[$#animals]\n";
+
+print "\n\n\nOther things of interest for arrays :: \n";
+
+# Array `slice'
+print "\@animals[0,1] :: @animals[0,1]\n";
+
+print "\@animals[0..2] :: @animals[0..2]\n";
+
+print "\@animals[0..\$#animals] :: @animals[0..$#animals]\n";
+
+
+
+# Doing various things with lists
+
+# Alphabatize
+my @sorted = sort @animals;
+
+# Not reverse alphabetical
+my @backwards = reverse @animals;
+
+# This is what you want for that
+my @reverseAlpha = reverse @sorted;
+
+print "@sorted\n";
+print "@backwards\n";
+print "@reverseAlpha\n";

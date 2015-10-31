@@ -1,0 +1,6 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to list all errors
+
+#compile-time error
+print "@ARG\n";

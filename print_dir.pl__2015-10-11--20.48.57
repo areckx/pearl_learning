@@ -1,0 +1,53 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+# Subroutine print_dir takes the name of the directory as a paramater
+# and prints the file in that dir, one per line
+
+# Write subroutine
+sub cat
+{
+	my $file = shift;
+	open FILE, $file;
+	while (my $line = <FILE>)
+		{
+			print $line;
+		}
+}
+
+sub print_dir
+# Opening Braces
+{
+	# Var for storing directory	
+	# Open all files in directory 
+	my @dir = (glob "res/*");
+	
+	# Assign the files to an array to be read
+	print "@dir[0, 1, 2, 3, 4]\n";
+
+	# Loop to open all files 
+	open FILE, "$dir[0]";
+
+	
+	while (my $file = shift)
+	{
+		cat $file;
+	}
+	
+
+	
+
+	
+	
+
+
+
+
+
+	
+#Closing Braces
+}
+
+# Invoke \print_dir\
+print_dir;

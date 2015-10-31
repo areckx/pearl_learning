@@ -1,0 +1,4 @@
+#! /usr/bin/perl
+ 
+#compile-time error
+print "@ARG\n";

@@ -1,0 +1,42 @@
+#!/usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+##
+### References
+###
+### A scalar value that can refer to any other Perl data type
+### 
+### Create lists and hashes within lists and hashes
+##
+### 2 level "hash of hash" structure
+##my $variables =
+##{
+##    scalar  => 
+##    {
+##        description  => "single item",
+##        sigil  => '$',
+##    },
+##    
+##    array  =>
+##    {
+##        description  => "ordered list of items",
+##        sigil  => '@',
+##    },
+##
+##    hash  =>
+##    {
+##        description  => "key/value pairs",
+##        sigil  => '%',
+##    },
+##};
+##
+##print "Scalars begin with a $variables->{'scalar'}->{'sigil'}\n"; 
+##print "Arrays begin with a $variables->{'array'}->{'sigil'}\n";
+##
+##print "This is done using hashes, which are a a method of storing "
+##	. "$variables->{'hash'}->{'description'} and by themselves begin with a "
+##	. "$variables->{'hash'}->{'sigil'}\n";

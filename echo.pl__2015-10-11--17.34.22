@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+
+sub print_file
+{
+	my $file = shift;
+
+	open FILE, $file;
+
+	# When `<..>' operator appears in a `while' loop, it uses 
+	# `$_' as a default loops variable
+	while (<FILE>)
+	{
+		print $_;
+	}
+}
+
+
+# Similar loop to \cat\ subroutine
+
+sub cat
+{
+	foreach (@_)
+	{
+		# If you don't provide a loop variable, Perl uses `$_' by default
+		print_file $_;
+
+		# Disadvantage :: `$_' is global
+		# Value of `$_' is `undef' because that is the terminating condition
+		# of \print_file\
+		print $_;
+	}
+}
+
+cat @ARGV;

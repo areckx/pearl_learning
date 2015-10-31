@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+
+sub print_file
+{
+	my $file = shift;
+
+	open FILE, $file;
+
+	while (my $line = <FILE>)
+	{
+		print $line;
+	}
+}
+
+
+# Similar loop to \cat\ subroutine
+
+sub cat
+{
+	foreach my $file (@_)
+	{
+		print_file $file;
+	}
+}
+
+cat @ARGV;

@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+print "It's over 9000!!!\n";
+sleep 3;
+open my $file, "annoying.txt";
+print "$file" x 99999 . "\n";

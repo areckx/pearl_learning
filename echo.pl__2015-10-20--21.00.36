@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+# Hashes
+#
+#  A set of key/value pairs
+my %fruitColor = ("apple", "red", "banana", "yellow");
+
+# Or...
+my %cleanFruitColor = 
+(
+    apple  => "red",
+    banana  => "yellow",
+);
+
+# Gives "red"
+print "$fruitColor{'apple'}\n";
+
+print "$cleanFruitColor{'apple'}\n";
+
+
+
+

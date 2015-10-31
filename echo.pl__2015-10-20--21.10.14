@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+# References
+#
+# A scalar value that can refer to any other Perl data type
+# 
+# Create lists and hashes within lists and hashes
+
+# 2 level "hash of hash" structure
+my $variables =
+{
+    scalar  => 
+    {
+    },
+    
+    array  =>
+    {
+    },
+
+    hash  =>
+    {
+    },
+};

@@ -1,0 +1,240 @@
+#!/usr/bin/perl
+use strict; use warnings; 
+# TODO
+# 
+# 	[*] Each file has one more line than previous (add)
+#
+# 	[*] "Compound" effect where each new file prints contents
+# 		of previous file and appends, so each file is exponentially
+# 		larger (compound)
+#
+# 	[!!] Allow user to input desired number of files to create
+#
+# 	[*] Set flag options so use can invoke command to do either add
+# 		or compound [ -a, --add ] and [ -c, --compound ]
+# 	
+# 	[!] Set args which allow naming of files with numbers (file_n if < 10,
+# 		file_nn if < 100, file _nnn if < 1000
+# 		
+# 		<> Allow for expansion no matter how many files are to be made
+# 			() Throw error and quit if resulting files larger than available
+# 				memory/space
+
+our $CONFLICT = "EE: Conflicting args: [-a, --add] and [-c, --compound]\n";
+our $EMPTY = "EE: annoying requires a string value between \"\"\n";
+our $FLAGS = "EE: annoying requires a flag [-a, --add] or [-c, --compound]\n";
+
+
+# Display help
+# 	[] Show usable flags
+# 	[] Show program information including where latest source can be found
+
+sub help
+{
+	print "Usage: annoying -FLAGS | STRING\n"
+		. "\n\t[-a, --add] : Concatenates STRING to multiple files "
+		. "adding a new line to each file. and exit\n"
+		. "\n\t[-c, --compound] : Concatenates STRING to multiple files "
+		. "adding double of the previous\n" 
+		. "\t\t\t   file to the next file. and exit\n"
+		. "\n\t[-h, --help] : Display this help and exit\n"
+		. "\n\t\t\t2015 Alex Loranger \t" 
+		. "<https://www.github.com/areckx/annoying\n";
+} 
+
+if (! (@ARGV) )
+{
+	help; 
+	exit;
+}
+
+# Use regex to convert @ARGV to contain only what the desired elements
+# of each arg should be
+
+# Should contain only elements which contain at least one (-) character
+# and store all of them (at the moment only one or the other but if both
+# throw an error and exit
+
+my @flags = @ARGV;
+
+# TODO
+### Exit with error if there are no flags
+### Make sure it ignores anything within ""
+##if ( (@flags[0..$#flags] !~ /(-a|--add|-c|--compound)/) ) 
+##{ 
+##		print $FLAGS;
+##		exit; 
+##}
+##
+
+
+# Should contain only elements enclosed in either (") or (') 
+# TODO 
+# 	[] Parse @ARGV for anything between ""
+# 	[] Find out how to either keey the "" or add them back in
+#my @string = @ARGV;
+#print @string, "\n";
+
+
+# The problem lies in the fact that when passing args via the command line
+# the string is added to @ARGV without the quotation marks
+#
+# Possible solutions:
+# 	[] find a way to keep the "" (or any symbol, really) in order to 
+# 		seperate the string args from the flags
+
+
+# Solution was that I needed to search within the ELEMENTS of the @array,
+# not the data glob of the @array itself
+my @string = @ARGV;
+our $string = @string[0..$#string];
+for ( ($string =~  (/"(.*?)"/) ) )
+{ 
+	$string = $1; 
+} 
+
+
+# Create 4 files
+# 	[] First file starts with one line
+# 	[] Second with contents of first file + add line (1 + 1 = 2)
+# 	[] Third file with contents of second file + add line (2 + 1 = 3)
+# 	[] Fourth file with contents of third file + add line (3 + 1 = 4) 
+sub add
+{
+	for (my $i = 1; $i < 5; $i++)
+	{ 
+		my $new = undef; 
+		my $filename = "$i.txt"; 
+		my $encoding = ":encoding(UTF-8)"; 
+
+		open ($new, ">> $encoding", $filename) 
+			or die "cannot open >> $encoding $i.txt: $!"; 
+
+		print $new "$string\n"; 
+
+			if ( ($i > 1) and ($i < 5) )
+			{
+				my $prev = $i - 1;
+				open (my $old, "< $encoding", "$prev.txt")
+					or die "cannot open < $encoding $prev.txt: $!"; 
+
+				while (my $line = <$old>)
+				{
+					print $new "$line"; 
+					shift; 
+				}
+
+				close $old;
+			} 
+
+		close $new; 
+	} 
+} 
+
+# Create initial file with one line(1)
+# second line has 2x first file (2 * 1 = 2)
+# third file  has 2x second file (2 * 2 = 4)
+# fourth file has 2x third file (4 * 2 = 8)
+sub compound
+{ 
+	for (my $i = 1; $i < 5; $i++)
+	{ 
+		my $new = undef; 
+		my $filename = "$i.txt"; 
+		my $encoding = ":encoding(UTF-8)"; 
+
+		open ($new, ">> $encoding", $filename) 
+			or die "cannot open >> $encoding $i.txt: $!"; 
+
+
+		if ( ($i) == (1) )
+		{ 
+			print $new "$string\n"; 
+		}
+
+			if ( ( ($i) > (1) ) and ( ($i) < (5) ) )
+			{
+				my $prev = $i - 1;
+				open (my $old, "< $encoding", "$prev.txt")
+					or die "cannot open < $encoding $prev.txt: $!"; 
+
+				while (my $line = <$old>)
+				{ 
+					print $new "$line"; 
+					shift; 
+					print $new "$line"; 
+				}
+
+				
+				close $old;
+			} 
+
+		close $new; 
+	} 
+} 
+
+if ( (grep (/-a/, @flags) ) 
+		or (grep (/--add/, @flags) ) ) 
+{
+	if ( (grep (/-c/, @flags ) )
+			or (grep (/--compound/, @flags) ) )
+	
+	{ 
+		print $CONFLICT;
+
+		if ( ($string) =~ (/^(-)/) )
+		{ 
+			print $EMPTY;
+			exit;
+		}
+
+		exit; 
+	}
+
+	if ( ($string) =~ (/(^-)/) )
+	{
+		print $EMPTY;
+		exit;
+	} 
+
+	add;
+}
+
+
+if ( (grep (/-c/, @flags) ) 
+		or (grep (/--compound/, @flags) ) )
+{
+	if ( (grep (/--add/, @flags) ) 
+			or (grep (/-a/, @flags) ) ) 
+	{
+		print $CONFLICT;
+
+		if ( ($string) =~ (/(^-)/) )
+		{
+			print $EMPTY;
+			exit;
+		}
+
+		exit; 
+	}
+	if ( ($string) =~ (/(^-)/) )
+	{
+		print $EMPTY;
+		exit;
+	}
+
+	compound;
+}
+
+
+if ( (grep (/-h/, @flags) ) 
+		or (grep (/--help/, @flags) ) )
+{
+	help;
+}
+
+if ( ! (@ARGV) )
+{ 
+	help;
+	exit;
+}

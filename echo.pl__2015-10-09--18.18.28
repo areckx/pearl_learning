@@ -1,0 +1,18 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to complain about more things wrong
+use strict;
+
+# use `warnings' pragma to complain about even more things wrong
+use warnings;
+
+sub echoShift
+{
+	my $p1 = shift @_;
+	my $p2 = shift @_;
+
+	print "Using shift to assign multiple command line args to our vars :: "
+		 ."$p1 $p2 @_\n"; 
+}
+
+echoShift @ARGV;

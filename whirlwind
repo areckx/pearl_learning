@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+# Runs an external command named within backquotes(` `)
+my @lines = `perldoc -u -f atan2`;
+
+# Start a loop that will process each one of these lines
+foreach (@lines) 
+{
+	# Basically converts anything with angle brackets (< >)
+	s/\w<([^>]+)>/\U$1/g;
+	print;
+}

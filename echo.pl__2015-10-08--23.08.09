@@ -1,0 +1,4 @@
+#! /usr/bin/perl
+ 
+#compile-time error
+paint "@ARGV\n";

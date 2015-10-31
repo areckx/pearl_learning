@@ -1,0 +1,30 @@
+#! /usr/bin/perl
+
+# Use `strict' pragma to list all errors
+use strict;
+
+# Declare `subroutine'
+sub echo 
+{
+	# `@_' is a built-in variable that refers to the array of values the 
+	# subroutine got as paramaters
+	print "@_\n";
+}
+
+# Create a new _local variable_ using `my'
+sub echo
+{
+	my @params = @_;
+
+# Cause strict to complain by making global variable in a subroutine
+#	@params = @_;
+	print "@params\n";
+}
+
+# Define a variable
+my @ARG = "Foo"; 
+
+print "@ARGV\n";
+
+# Access elements of an array using brackets
+print "$params[0] $params[2]\n";

@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+# Subroutine print_dir takes the name of the directory as a paramater
+# and prints the file in that dir, one per line
+
+# Write subroutine
+
+sub print_dir
+# Opening Braces
+{
+	# Var for storing directory	
+	# Open all files in directory 
+	
+	my @files = glob "@_/*";
+
+## Going to have to try an index loop, even though it wasn't mentioned
+## in the chapter...
+	# Assign the files to an array to be read
+	print "@files[0..$#files]";
+
+	
+#Closing Braces
+}
+
+# Invoke \print_dir\
+print_dir @ARGV;

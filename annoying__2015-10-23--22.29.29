@@ -1,0 +1,37 @@
+#!/usr/bin/perl
+use strict; use warnings; 
+use v5.10;
+
+##say 'for (my $i = 1; $i < 5; $i++)';
+for (my $i = 1; $i < 5; $i++)
+{ 
+##	say '{';
+	my $fh = undef;
+##	say 'my $fh = undef;';
+
+	my $filename = "$i.txt";
+##	say 'my $filename = "$i.txt"';
+
+	my $encoding = ":encoding(UTF-8)";
+##	say 'my $encoding = ":encoding(UTF-8)"';
+
+
+	open ($fh, ">> $encoding", $filename) 
+		|| die "cannot open > $i.txt: $!"; 
+
+##	say 'open ($fh, ">> $encoding", $filename)'
+		. '|| die "cannot open > $i.txt: $!";'; 
+	
+	print $fh "omgomgomgomgomgomg\n"; 
+##	say 'print $fh "omgomgomgomgomgomg\n";'; 
+
+	close $fh; 
+##	say 'close $fh;'; 
+}
+##say '}';
+
+
+
+
+
+
